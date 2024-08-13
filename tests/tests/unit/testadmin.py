@@ -82,7 +82,7 @@ class ModeratedObjectAdminBehaviorTestCase(WebTestCase):
         self.assertEquals(self.book.moderated_object.changed_by, None)
         url = reverse('admin:tests_book_change', args=(self.book.pk,))
         page = self.get(url)
-        form = page.form
+        form = page.forms["book_form"]
         form['title'] = "Book modified"
         page = form.submit()
         self.assertIn(page.status_code, [302, 200])

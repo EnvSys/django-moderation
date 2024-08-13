@@ -159,7 +159,7 @@ class GenericModerator:
             context.update(extra_context)
 
         message = render_to_string(message_template, context)
-        subject = render_to_string(subject_template, context)
+        subject = render_to_string(subject_template, context).strip()
 
         backend = self.get_message_backend()
         backend.send(subject=subject, message=message, recipient_list=recipient_list)
