@@ -2,10 +2,10 @@ from django.apps import AppConfig
 
 
 class SimpleModerationConfig(AppConfig):
-    default = False
     name = 'moderation'
     verbose_name = 'Moderation'
     default_auto_field = 'django.db.models.AutoField'
+    default = False
 
 
 class ModerationConfig(SimpleModerationConfig):
