@@ -11,7 +11,7 @@ tests_require = [
     "pillow",
 ]
 
-install_requires = ["django>=4.2"]
+install_requires = ["django<6"]
 
 setup(
     name='django-moderation',
