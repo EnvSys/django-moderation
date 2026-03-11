@@ -4,12 +4,14 @@ import os
 # Dynamically calculate the version based on moderation.VERSION.
 version = __import__('moderation').__version__
 
-tests_require = [
-    "django>=4.2",
-    "django-webtest",
-    "webtest",
-    "pillow",
-]
+extras_require = {
+    "test": [
+        "django>=4.2",
+        "django-webtest",
+        "webtest",
+        "pillow",
+    ]
+}
 
 install_requires = ["django<6"]
 
@@ -45,8 +47,7 @@ setup(
     license='BSD',
     packages=find_packages('.', exclude=('tests', 'example_project')),
     include_package_data=True,
-    tests_require=tests_require,
-    test_suite='runtests.runtests',
+    extras_require=extras_require,
     install_requires=install_requires,
     zip_safe=False,
 )
