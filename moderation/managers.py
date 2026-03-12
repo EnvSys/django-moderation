@@ -24,7 +24,7 @@ class ModerationObjectsManager(Manager):
         return MetaClass(
             self.__class__.__name__,
             (self.__class__, base_manager),
-            {'use_for_related_fields': True},
+            {},
         )
 
     def filter_moderated_objects(self, queryset):

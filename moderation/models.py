@@ -217,7 +217,12 @@ class ModeratedObject(models.Model):
                 base_object.save_base(raw=True)
                 # The _save_parents call is required for models with an
                 # inherited visibility_column.
-                base_object._save_parents(base_object.__class__, None, None)
+                base_object._save_parents(
+                    base_object.__class__,
+                    using=None,
+                    update_fields=None,
+                    force_insert=frozenset(),
+                )
 
         if self.changed_by:
             self.moderator.inform_user(self.content_object, self.changed_by)

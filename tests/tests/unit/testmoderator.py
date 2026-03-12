@@ -176,14 +176,14 @@ class AutoModerateModeratorTestCase(TestCase):
 
     def test_is_auto_reject_user_is_anonymous(self):
         user = Mock()
-        user.is_anonymous = lambda: True
+        user.is_anonymous = True
         reason = self.moderator.is_auto_reject(self.obj, user)
         self.assertTrue(reason)
         self.assertEqual(reason, 'Auto-rejected: Anonymous User')
 
     def test_is_auto_reject_user_is_not_anonymous(self):
         user = Mock()
-        user.is_anonymous = lambda: False
+        user.is_anonymous = False
         self.assertFalse(self.moderator.is_auto_reject(self.obj, user))
 
     def test_auto_reject_for_groups_user_in_group(self):

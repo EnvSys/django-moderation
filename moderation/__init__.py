@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.8.0'
-
-default_app_config = "moderation.apps.ModerationConfig"
+__version__ = "0.9.0"
 
 
 class _ModerationProxy:

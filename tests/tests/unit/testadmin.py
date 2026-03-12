@@ -46,7 +46,7 @@ class ModeratedObjectAdminTestCase(TestCase):
 
     def test_get_actions_should_not_return_delete_selected(self):
         actions = self.admin.get_actions(self.request)
-        self.failIfEqual('delete_selected' in actions, True)
+        self.assertNotEqual("delete_selected" in actions, True)
 
     def test_content_object_returns_deserialized_object(self):
         user = User.objects.get(username='admin')
@@ -79,18 +79,18 @@ class ModeratedObjectAdminBehaviorTestCase(WebTestCase):
 
     def test_set_changed_by_property(self):
         """even_when_auto_approve_for_staff_is_false"""
-        self.assertEquals(self.book.moderated_object.changed_by, None)
+        self.assertEqual(self.book.moderated_object.changed_by, None)
         url = reverse('admin:tests_book_change', args=(self.book.pk,))
         page = self.get(url)
-        form = page.form
-        form['title'] = "Book modified"
+        form = page.forms["book_form"]
+        form["title"] = "Book modified"
         page = form.submit()
         self.assertIn(page.status_code, [302, 200])
         book = Book.unmoderated_objects.get(pk=self.book.pk)  # refetch the obj
-        self.assertEquals(book.title, "Book not modified")
+        self.assertEqual(book.title, "Book not modified")
         moderated_obj = ModeratedObject.objects.get_for_instance(book)
-        self.assertEquals(moderated_obj.changed_object.title, "Book modified")
-        self.assertEquals(moderated_obj.changed_by, self.user)
+        self.assertEqual(moderated_obj.changed_object.title, "Book modified")
+        self.assertEqual(moderated_obj.changed_by, self.user)
 
 
 class AdminActionsTestCase(TestCase):
